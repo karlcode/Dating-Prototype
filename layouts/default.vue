@@ -1,5 +1,5 @@
 <template>
-  <v-app dark toolbar footer>
+  <v-app light toolbar footer>
     <v-navigation-drawer
       persistent
       :mini-variant="miniVariant"
@@ -90,7 +90,7 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Vuetify.js'
+        title: 'Dating Season'
       }
     }
   }
