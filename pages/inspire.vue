@@ -55,15 +55,16 @@
 </template>
 
 <script>
+  const axios = require('axios')
   export default {
     data: () => ({
       cards: [],
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
     created() {
-      fetch('https://randomuser.me/api/?results=50&gender=male').then(res => res.json())
+      axios.get('https://randomuser.me/api/?results=50&gender=male')
       .then(response =>  {
-        var result = response.results
+        var result = response.data.results
         console.log(result)
         for(var i=0;i<result.length;i++){
           this.cards.push({
