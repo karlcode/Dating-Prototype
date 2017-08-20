@@ -42,8 +42,9 @@
       >
         <v-icon>remove</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-btn flat v-text="title" to="/"></v-btn>
       <v-spacer></v-spacer>
+      <v-btn primary flat router nuxt to="/about">About</v-btn>
       <v-btn
         icon
         @click.native.stop="rightDrawer = !rightDrawer"
@@ -85,7 +86,8 @@
         fixed: false,
         items: [
           { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
+          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
+          { icon: 'bubble_chart', title: 'About', to: '/about' }
         ],
         miniVariant: false,
         right: true,
