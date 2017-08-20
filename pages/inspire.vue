@@ -1,38 +1,53 @@
 <template>
   <v-layout column >
+
+    
       <v-flex xs10 offset-xs1>
-        <h2>Daddies</h2>
+      <v-layout row>
+      <v-flex xs9 >
+      <h2 class="text-xs-left">Daddies</h2>
+       </v-flex>
+      <v-flex xs3>
+      <v-select class="text-xs-right" v-bind:items="dropdown_filter" label="Filter" segmented></v-select>
+       </v-flex>
+       </v-layout>
+   
+        
+     
         <v-container fluid grid-list-md class="grey lighten-4">
         <v-layout row wrap>
           <v-flex
             v-bind="{ [`xs${card.flex}`]: true }"
             v-for="card in cards"
             :key="card.title"
+            
           >
-            <v-card>
+          
+            <v-card >
+              <a :href=" card.src ">
               <v-card-media
                 :src="card.src"
                 height="200px"
               >
               </v-card-media>
+              </a>
               <v-card-title primary-title>
               <div>
-                <span class="headline" v-text="card.title">Josh Chase</span>
-                
+                <span class="headline" v-text="card.title"></span>
               </div>
-              </v-card-title>
-              <v-card-text v-text="card.title"></v-card-text>
               <v-card-actions class="white">
                 <v-spacer></v-spacer>
                 <v-btn icon>
                   <v-icon>favorite</v-icon>
                 </v-btn>
-                <v-btn icon>
-                  <v-icon>share</v-icon>
-                </v-btn>
+                <span v-text="'Age: ' + card.age"></span>
               </v-card-actions>
+              </v-card-title>
+            
             </v-card>
+          
           </v-flex>
+          
         </v-layout>
       </v-container>
       </v-flex>
@@ -42,17 +57,24 @@
 <script>
   export default {
     data: () => ({
-      cards: [
-        { title: 'Pre-fab homes', src: 'http://www.math.uni-frankfurt.de/~person/_4170854.jpg', flex: 4 },
-        { title: 'Favorite road trips', src: 'https://cdn.shopify.com/s/files/1/0898/5824/products/SuperGirl_Web4_1024x1024.jpg?v=1499292991', flex: 4 },
-        { title: 'Best airlines', src: 'https://www.thesun.co.uk/wp-content/uploads/2017/05/nintchdbpict000321168659.jpg?strip=all&w=960&quality=100', flex: 4 },
-        { title: 'Pre-fab homes', src: 'http://www.math.uni-frankfurt.de/~person/_4170854.jpg', flex: 4 },
-        { title: 'Favorite road trips', src: 'https://cdn.shopify.com/s/files/1/0898/5824/products/SuperGirl_Web4_1024x1024.jpg?v=1499292991', flex: 4 },
-        { title: 'Best airlines', src: 'https://www.thesun.co.uk/wp-content/uploads/2017/05/nintchdbpict000321168659.jpg?strip=all&w=960&quality=100', flex: 4 },
-        { title: 'Pre-fab homes', src: 'http://www.math.uni-frankfurt.de/~person/_4170854.jpg', flex: 4 },
-        { title: 'Favorite road trips', src: 'https://cdn.shopify.com/s/files/1/0898/5824/products/SuperGirl_Web4_1024x1024.jpg?v=1499292991', flex: 4 },
-        { title: 'Best airlines', src: 'https://www.thesun.co.uk/wp-content/uploads/2017/05/nintchdbpict000321168659.jpg?strip=all&w=960&quality=100', flex: 4 },
-      ]
-    })
+      cards: [],
+      dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
+    }),
+    created() {
+      fetch('https://randomuser.me/api/?results=50&gender=male').then(res => res.json())
+      .then(response =>  {
+        var result = response.results
+        console.log(result)
+        for(var i=0;i<result.length;i++){
+          this.cards.push({
+            title: result[i].name.first.charAt(0).toUpperCase()+result[i].name.first.slice(1)  + " " + result[i].name.last.charAt(0).toUpperCase()+result[i].name.last.slice(1) ,
+            src: result[i].picture.large,
+            age: Math.floor((Math.random() * 90) + 20),
+            flex: 4
+          }  
+          )
+        }
+      })
+    }
   }
 </script>

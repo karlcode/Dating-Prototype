@@ -1,22 +1,18 @@
 <template>
   <v-layout column >
-    <v-flex xs10 offset-xs1>
-      <div class="cum"></div>
+    <v-flex xs10 offset-xs1 text-xs-center>
       
-      <h2>Meet your next Sugar Daddy</h2>
-        
-       
-          <v-btn primary round router nuxt to="/inspire">Sign up now to be notified when the Beta releases</v-btn>
-         
-        
-     
+      <div class="main_container">
+      <h2>Find your next Sugar Daddy</h2>
+  
+      <v-btn primary round router nuxt to="/inspire">See all the Dads</v-btn>
+      </div>
     </v-flex>
   </v-layout>
 </template>
 
 <style scoped>
-.cum{
-  background-color: pink;
-  height: 200px;
+.main_container{
+  padding-top: 200px;
 }
 </style>

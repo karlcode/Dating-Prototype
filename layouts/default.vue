@@ -4,7 +4,9 @@
       persistent
       :mini-variant="miniVariant"
       :clipped="clipped"
+      right
       v-model="drawer"
+      :disable-route-watcher="true"
     >
       <v-list>
         <v-list-tile 
@@ -23,61 +25,25 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed>
-      <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn 
-        icon
-        @click.native.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.native.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.native.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-btn flat v-text="title" to="/"></v-btn>
+      
+      
+      <v-toolbar-title>Seeking Daddy</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn primary flat router nuxt to="/about">About</v-btn>
-      <v-btn
-        icon
-        @click.native.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-toolbar-items>
+      <v-btn flat>About</v-btn>
+      </v-toolbar-items>
+      <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
     <main>
       <v-container fluid>
         <nuxt />
       </v-container>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+    
     <v-footer :fixed="fixed">
-    <v-layout row wrap>
-      <v-flex xs4 v-for="i in 3" :key="i">
-        <v-card dark>
-          <span>&copy; 2017</span>
-        </v-card>
-      </v-flex>
+    <v-layout row wrap></v-layout>
+      <span>&copy; 2017</span>
+      
     </v-layout>
     </v-footer>
   </v-app>
@@ -88,12 +54,12 @@
     data () {
       return {
         clipped: false,
-        drawer: true,
+        drawer: false,
         fixed: false,
         items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
-          { icon: 'bubble_chart', title: 'About', to: '/about' }
+          { icon: 'apps', title: 'Home', to: '/' },
+          { icon: 'bubble_chart', title: 'Dad Finder', to: '/inspire' },
+          { icon: 'info_outline', title: 'About', to: '/about' }
         ],
         miniVariant: false,
         right: true,
