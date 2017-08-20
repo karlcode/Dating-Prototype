@@ -1,6 +1,6 @@
 <template>
   <v-layout column >
-    <v-flex xs12 offset-xs1>
+    <v-flex xs10 offset-xs1>
       <div class="cum"></div>
       
       <h2>Meet your next Sugar Daddy</h2>

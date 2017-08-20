@@ -72,7 +72,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed">
-      <span>&copy; 2017</span>
+    <v-layout row wrap>
+      <v-flex xs4 v-for="i in 3" :key="i">
+        <v-card dark>
+          <span>&copy; 2017</span>
+        </v-card>
+      </v-flex>
+    </v-layout>
     </v-footer>
   </v-app>
 </template>
