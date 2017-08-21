@@ -59,7 +59,8 @@
         items: [
           { icon: 'apps', title: 'Home', to: '/' },
           { icon: 'bubble_chart', title: 'Dad Finder', to: '/inspire' },
-          { icon: 'info_outline', title: 'About', to: '/about' }
+          { icon: 'info_outline', title: 'About', to: '/about' },
+          { icon: 'info_outline', title: 'Chat', to: '/chat' }
         ],
         miniVariant: false,
         right: true,

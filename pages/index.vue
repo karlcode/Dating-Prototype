@@ -11,6 +11,7 @@
   </v-layout>
 </template>
 
+
 <style scoped>
 .main_container{
   padding-top: 200px;

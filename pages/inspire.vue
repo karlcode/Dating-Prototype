@@ -1,17 +1,6 @@
 <template>
   <v-layout column >
-      <li v-for="user in users" class="user" :key="user['.key']">
-      <span>{{user.name}}</span>
-      </li>
-      <form id="form" v-on:submit.prevent="addUser">
-      <input type="text" v-model="newUser.name" placeholder="Message">
-      <input type="submit" value="Add Message">
-      </form>
-      <span>{{initName}}</span>
-      <form id="form" v-on:submit.prevent="initName">
-      <input type="text" v-model.lazy="initName" placeholder="Your name">
-      <input type="submit" value="Create Profile">
-      </form>
+     
       <v-flex xs10 offset-xs1>
       <v-layout row>
       <v-flex xs9 >
@@ -65,44 +54,13 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   const axios = require('axios')
-  var VueFire = require('vuefire')
-  Vue.use(VueFire)
-  import * as firebase from "firebase";
-  var config = {
-    apiKey: "AIzaSyCdqIU_fTgJtMnAOhwkhA3qekjeoUynf3k",
-    authDomain: "dating-prototype.firebaseapp.com",
-    databaseURL: "https://dating-prototype.firebaseio.com",
-    projectId: "dating-prototype",
-    storageBucket: "dating-prototype.appspot.com",
-    messagingSenderId: "34141672867"
-  };
 
-  firebase.initializeApp(config)
   export default {
     data: () => ({
       cards: [],
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
-      newUser: {
-        name: '',
-        message: ''
-      },
-      initName: ''
     }),
-    firebase: {
-    users: firebase.database().ref('users')
-    },
-    methods: {
-       addUser: function () {
-        var user = this.initName
-        usersRef.push(this.newUser)
-        this.newUser.name = ''
-      },
-      initName: function (){
-        this.initName = ''
-      }
-    },
     mounted() {
       axios.get('https://randomuser.me/api/?results=50&gender=male')
       .then(response =>  {
