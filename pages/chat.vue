@@ -14,6 +14,9 @@
       </form>-->
       
       <h1>YOLO</h1>
+      <li v-for="user in users" class="user" :key="user['.key']">
+      <span>{{user.message}} -- {{user}}</span>
+    </li>
       <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
       
 </v-layout>
@@ -23,6 +26,10 @@
 <script>
   import Vue from 'vue'
   import firebase from "firebase";
+  import VueFire from 'vuefire';
+
+    // explicit installation required in module environments
+  Vue.use(VueFire)
   let config = {
         apiKey: "AIzaSyCdqIU_fTgJtMnAOhwkhA3qekjeoUynf3k",
         authDomain: "dating-prototype.firebaseapp.com",
@@ -31,23 +38,24 @@
         storageBucket: "dating-prototype.appspot.com",
         messagingSenderId: "34141672867"
 }
-
-
+if (!firebase.apps.length) {
+    firebase.initializeApp(config)
+}
+var db = firebase.database()
   //const messagesRef = db.ref('messages')
   export default {
-    beforeCreate: () => {
-    if (!firebase.apps.length) {
-    var Firebase = firebase.initializeApp(config)
-    }
-    },
     data: () => ({
-        newMessage: ''
+        newMessage: '',
+        users: db.ref('dddddd')
     }),
+    firebase: {
+        users: db.ref('dddddd')
+    },
     methods: {
         addMessage (){
             if (this.newMessage.trim()) {
-            this.Firebase.ref('messages').push({
-            text: this.newMessage
+            db.ref('dddddd').push({
+            message: this.newMessage
           })
           this.newMessage = ''
         }
