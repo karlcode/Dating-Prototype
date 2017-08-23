@@ -41,20 +41,19 @@
 if (!firebase.apps.length) {
     firebase.initializeApp(config)
 }
-var db = firebase.database()
+var db = firebase.database().ref('users/sadas')
   //const messagesRef = db.ref('messages')
   export default {
     data: () => ({
-        newMessage: '',
-        users: db.ref('dddddd')
+        newMessage: ''
     }),
     firebase: {
-        users: db.ref('dddddd')
+        users: db
     },
     methods: {
         addMessage (){
             if (this.newMessage.trim()) {
-            db.ref('dddddd').push({
+            db.push({
             message: this.newMessage
           })
           this.newMessage = ''
