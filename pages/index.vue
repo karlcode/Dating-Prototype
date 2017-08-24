@@ -11,9 +11,26 @@
   </v-layout>
 </template>
 
+<script>
 
+  import firebase from 'firebase'
+  import {config} from '../plugins/firebase'
+  export default {
+    created: () => {
+
+      firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.$nuxt.$router.push('/success')
+      } else {
+        this.$nuxt.$router.push('/auth')
+      }
+     });
+    }
+  }
+</script>
 <style scoped>
 .main_container{
   padding-top: 200px;
 }
 </style>
+

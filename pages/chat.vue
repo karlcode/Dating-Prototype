@@ -17,6 +17,10 @@
       <li v-for="user in users" class="user" :key="user['.key']">
       <span>{{user.message}} -- {{user}}</span>
     </li>
+
+        <select>
+        <option>asfasfsaf</option>
+        </select>
       <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
       
 </v-layout>
@@ -27,21 +31,14 @@
   import Vue from 'vue'
   import firebase from "firebase";
   import VueFire from 'vuefire';
-
+  import {config} from '../plugins/firebase'
     // explicit installation required in module environments
   Vue.use(VueFire)
-  let config = {
-        apiKey: "AIzaSyCdqIU_fTgJtMnAOhwkhA3qekjeoUynf3k",
-        authDomain: "dating-prototype.firebaseapp.com",
-        databaseURL: "https://dating-prototype.firebaseio.com",
-        projectId: "dating-prototype",
-        storageBucket: "dating-prototype.appspot.com",
-        messagingSenderId: "34141672867"
-}
+  
 if (!firebase.apps.length) {
-    firebase.initializeApp(config)
+   firebase.initializeApp(config)
 }
-var db = firebase.database().ref('users/sadas')
+var db = firebase.database().ref('users/')
   //const messagesRef = db.ref('messages')
   export default {
     data: () => ({
@@ -59,6 +56,6 @@ var db = firebase.database().ref('users/sadas')
           this.newMessage = ''
         }
     }
-  }
+    }
   }
 </script>
