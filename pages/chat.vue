@@ -1,4 +1,5 @@
 <template>
+
 <v-layout column >
 <!--<span>{{initName}}</span>
       <form id="form" v-on:submit.prevent="initName">
@@ -14,15 +15,17 @@
       </form>-->
       
       <h1>YOLO</h1>
+      <div>
       <li v-for="user in users" class="user" :key="user['.key']">
       <span>{{user.message}} -- {{user}}</span>
-    </li>
+        </li>
+        </div>
 
-        <select>
-        <option>asfasfsaf</option>
-        </select>
       <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
-      
+    
+      <v-text-field id="email" placeholder='Email'/>
+      <v-text-field id="password" placeholder='Password'/>
+      <v-btn @click="handleSignUp">Create Account</v-btn>
 </v-layout>
 
 </template>
@@ -32,22 +35,65 @@
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
-    // explicit installation required in module environments
+
   Vue.use(VueFire)
-  
+
+//If there is no firebase instance running, initialize the app
 if (!firebase.apps.length) {
    firebase.initializeApp(config)
 }
+
 var db = firebase.database().ref('users/')
   //const messagesRef = db.ref('messages')
   export default {
     data: () => ({
-        newMessage: ''
+        newMessage: '',
+         person: {}
     }),
     firebase: {
         users: db
     },
+    beforeCreate: ()=> {
+        firebase.auth().onAuthStateChanged(function(person) {
+            if (person){
+                this.person = person
+            }
+            else {
+            firebase.auth().signInAnonymously().catch(console.error)
+        }
+        }.bind(this))
+    },
     methods: {
+            handleSignUp() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            if (email.length < 4) {
+                alert('Please enter an email address.');
+                return;
+            }
+            if (password.length < 4) {
+                alert('Please enter a password.');
+                return;
+            }
+            // Sign in with email and pass.
+            // [START createwithemail]
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // [START_EXCLUDE]
+                if (errorCode == 'auth/weak-password') {
+                alert('The password is too weak.');
+                } else {
+                alert(errorMessage);
+                }
+                console.log(error);
+                // [END_EXCLUDE]
+            });
+            // [END createwithemail]
+            email = ''
+            password = ''
+            },
         addMessage (){
             if (this.newMessage.trim()) {
             db.push({
