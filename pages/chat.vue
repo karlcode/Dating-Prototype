@@ -16,16 +16,17 @@
       
       <h1>YOLO</h1>
       <div>
-      <li v-for="user in users" class="user" :key="user['.key']">
-      <span>{{user.message}} -- {{user}}</span>
+      <li v-for="person in persons" class="user" :key="person['.key']">
+      <span>{{person.message}} -- {{person}}</span>
         </li>
         </div>
-
+        
       <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
     
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn @click="handleSignUp">Create Account</v-btn>
+      <div>{{user}}</div>
 </v-layout>
 
 </template>
@@ -48,15 +49,16 @@ var db = firebase.database().ref('users/')
   export default {
     data: () => ({
         newMessage: '',
-         person: {}
+         user: {}
     }),
     firebase: {
-        users: db
+        persons: db
     },
     beforeCreate: ()=> {
-        firebase.auth().onAuthStateChanged(function(person) {
-            if (person){
-                this.person = person
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user){
+                this.user = user
+                console.log(user)
             }
             else {
             firebase.auth().signInAnonymously().catch(console.error)
