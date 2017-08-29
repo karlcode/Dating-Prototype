@@ -14,7 +14,7 @@
       <input type="submit" value="Add Message">
       </form>-->
       
-      <h1>YOLO</h1>
+
       <div>
       <li v-for="person in persons" class="user" :key="person['.key']">
       <span>{{person.message}} -- {{person}}</span>
@@ -59,11 +59,18 @@ var db = firebase.database().ref('users/')
             if (user){
                 this.user = user
                 console.log(user)
+                console.log(user)
             }
             else {
             firebase.auth().signInAnonymously().catch(console.error)
         }
         }.bind(this))
+    },
+    created: {
+        getItems(){
+            const user = auth.getUser()
+            
+        }
     },
     methods: {
             handleSignUp() {
