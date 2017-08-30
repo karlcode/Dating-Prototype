@@ -26,7 +26,9 @@
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn @click="handleSignUp">Create Account</v-btn>
-      <div>{{user}}</div>
+      <div v-if="this.user !== ''">
+      <p><strong>{{user}}</strong></p>
+      </div>
 </v-layout>
 
 </template>
@@ -49,28 +51,29 @@ var db = firebase.database().ref('users/')
   export default {
     data: () => ({
         newMessage: '',
-         user: {}
+         user: {
+             email: '',
+             key: ''
+         }
     }),
     firebase: {
         persons: db
     },
-    beforeCreate: ()=> {
+    computed: ()=> {
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
-                this.user = user
-                console.log(user)
-                console.log(user)
+                this.user = {
+                    email: user.email,
+                    key: user.uid
+                }
+                console.log(this.user)
+            
             }
             else {
             firebase.auth().signInAnonymously().catch(console.error)
+            this.user = null
         }
         }.bind(this))
-    },
-    created: {
-        getItems(){
-            const user = auth.getUser()
-            
-        }
     },
     methods: {
             handleSignUp() {
