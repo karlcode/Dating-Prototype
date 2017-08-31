@@ -59,7 +59,8 @@ var db = firebase.database().ref('users/')
     firebase: {
         persons: db
     },
-    computed: ()=> {
+    beforeCreate(){
+
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
                 this.user = {
@@ -76,6 +77,7 @@ var db = firebase.database().ref('users/')
         }.bind(this))
     },
     methods: {
+
             handleSignUp() {
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
@@ -89,7 +91,8 @@ var db = firebase.database().ref('users/')
             }
             // Sign in with email and pass.
             // [START createwithemail]
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
