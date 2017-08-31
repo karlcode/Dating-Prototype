@@ -14,10 +14,12 @@
       <input type="submit" value="Add Message">
       </form>-->
       
-
+      <div v-if="this.user !== ''">
+      <p><strong>User logged in as {{user}}</strong></p>
+      </div>
       <div>
       <li v-for="person in persons" class="user" :key="person['.key']">
-      <span>{{person.message}} -- {{person}}</span>
+      <span>{{person}}</span>
         </li>
         </div>
         
@@ -26,9 +28,7 @@
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn @click="handleSignUp">Create Account</v-btn>
-      <div v-if="this.user !== ''">
-      <p><strong>{{user}}</strong></p>
-      </div>
+      
 </v-layout>
 
 </template>
@@ -60,7 +60,6 @@ var db = firebase.database().ref('users/')
         persons: db
     },
     beforeCreate(){
-
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
                 this.user = {
@@ -120,3 +119,17 @@ var db = firebase.database().ref('users/')
     }
   }
 </script>
+
+<style>
+li, .user{
+   list-style: none;
+   display: inline-block;
+    background-color: #1998e6;
+	margin-bottom: 2px;
+	float: right;
+	padding: 7px 13px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+}
+</style>
