@@ -27,8 +27,10 @@
     
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
-      <v-btn @click="handleSignUp">Create Account</v-btn>
-      <v-btn @click="signOut">Logout</v-btn>
+      <v-btn @click.native="handleSignUp">Create Account</v-btn>
+      <v-btn @click.native="login">Login</v-btn>
+      <v-btn @click.native="signOut">Logout</v-btn>
+      <v-btn @click.native="alert">Alert</v-btn>
       
 </v-layout>
 
@@ -67,18 +69,16 @@ var db = firebase.database().ref('users/')
                     email: user.email,
                     key: user.uid
                 }
-                console.log(this.user)
-            
             }
             else {
-            firebase.auth().signInAnonymously().catch(console.error)
+            console.log("No user found")
+            //firebase.auth().signInAnonymously().catch(console.error)
             this.user = null
         }
         }.bind(this))
     },
     methods: {
-
-            handleSignUp() {
+            handleSignUp: function() {
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             if (email.length < 4) {
@@ -109,17 +109,26 @@ var db = firebase.database().ref('users/')
             email = ''
             password = ''
             },
-            signOut() {
+            login: function () {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(console.log("asfasfas"))
+            },
+            signOut: function() {
                 console.log("asfasf")
                 firebase.auth().signOut()
-                .then(()=>{
+                .then((user)=>{
                      this.user.email = firebase.auth().currentUser;
                     console.log(this.user)
                     console.log("asfasf")
                 }    
                 )
             },
-        addMessage (){
+            alert: function(){
+                alert("asf")
+            },
+        addMessage: function(){
             if (this.newMessage.trim()) {
             db.push({
             message: this.newMessage
