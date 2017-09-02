@@ -28,6 +28,7 @@
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn @click="handleSignUp">Create Account</v-btn>
+      <v-btn @click="signOut">Logout</v-btn>
       
 </v-layout>
 
@@ -108,6 +109,16 @@ var db = firebase.database().ref('users/')
             email = ''
             password = ''
             },
+            signOut() {
+                console.log("asfasf")
+                firebase.auth().signOut()
+                .then(()=>{
+                     this.user.email = firebase.auth().currentUser;
+                    console.log(this.user)
+                    console.log("asfasf")
+                }    
+                )
+            },
         addMessage (){
             if (this.newMessage.trim()) {
             db.push({
@@ -121,7 +132,7 @@ var db = firebase.database().ref('users/')
 </script>
 
 <style>
-li, .user{
+.user{
    list-style: none;
    display: inline-block;
     background-color: #1998e6;
