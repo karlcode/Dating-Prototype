@@ -72,9 +72,9 @@ var db = firebase.database().ref('users/')
             }
             else {
             console.log("No user found")
-            //firebase.auth().signInAnonymously().catch(console.error)
+            firebase.auth().signInAnonymously().catch(console.error)
             this.user = null
-        }
+            }
         }.bind(this))
     },
     methods: {
@@ -113,15 +113,26 @@ var db = firebase.database().ref('users/')
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(console.log("asfasfas"))
+            .catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode == 'auth/invalid-email') {
+                alert('Invalid Email');
+                } else {
+                alert(errorMessage);
+                }
+            })
+            .then(console.log("Redirect here or some shit")
+            )
             },
             signOut: function() {
-                console.log("asfasf")
+                console.log("signoutFunction")
                 firebase.auth().signOut()
                 .then((user)=>{
                      this.user.email = firebase.auth().currentUser;
                     console.log(this.user)
-                    console.log("asfasf")
+                    console.log("signOutThen")
                 }    
                 )
             },
