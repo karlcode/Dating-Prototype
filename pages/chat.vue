@@ -27,10 +27,10 @@
     
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
-      <v-btn @click.native="handleSignUp">Create Account</v-btn>
-      <v-btn @click.native="login">Login</v-btn>
-      <v-btn @click.native="signOut">Logout</v-btn>
-      <v-btn @click.native="alert">Alert</v-btn>
+      <v-btn v-if="this.user.email == null" @click.native="handleSignUp">Create Account</v-btn>
+      <v-btn v-if="this.user.email == null" @click.native="login">Login</v-btn>
+      <v-btn v-if="this.user.email !== null" @click.native="signOut">Logout</v-btn>
+
       
 </v-layout>
 
@@ -135,9 +135,6 @@ var db = firebase.database().ref('users/')
                     console.log("signOutThen")
                 }    
                 )
-            },
-            alert: function(){
-                alert("asf")
             },
         addMessage: function(){
             if (this.newMessage.trim()) {
