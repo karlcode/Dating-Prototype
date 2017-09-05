@@ -27,10 +27,10 @@
     <v-toolbar fixed>
       
       
-      <v-toolbar-title>Seeking Daddy</v-toolbar-title>
+      <v-toolbar-title><router-link to="/">Seeking Daddy</router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-      <v-btn flat>About</v-btn>
+      <v-btn flat>Login</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
@@ -58,6 +58,7 @@
         fixed: false,
         items: [
           { icon: 'apps', title: 'Home', to: '/' },
+          { icon: 'info_outline', title: 'Login', to: '/auth' },
           { icon: 'bubble_chart', title: 'Dad Finder', to: '/inspire' },
           { icon: 'info_outline', title: 'About', to: '/about' },
           { icon: 'info_outline', title: 'Chat', to: '/chat' }

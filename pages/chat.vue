@@ -1,5 +1,5 @@
 <template>
-
+<div class="chat">
 <v-layout column >
 <!--<span>{{initName}}</span>
       <form id="form" v-on:submit.prevent="initName">
@@ -23,21 +23,10 @@
         </li>
         </div>
         </v-flex>
-      <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
-      <v-flex xs6 offset-xs3>
-      <v-text-field id="email" placeholder='Email'/>
-      <v-text-field id="password" placeholder='Password'/>
-      </v-flex>
-      <v-flex xs4 offset-xs4 v-if="this.user.email == null">
-      <v-btn  @click.native="handleSignUp">Create Account</v-btn>
-      <span> OR </span>
-      <v-btn  @click.native="login">Login</v-btn>
-      </v-flex>
-      <v-btn v-if="this.user.email !== null" @click.native="signOut">Logout</v-btn>
-
-      
+      <input v-model="newMessage" class="bottom_input" @keyup.enter="addMessage" placeholder="Add message" />
+          
 </v-layout>
-
+</div>
 </template>
 
 <script>
@@ -45,7 +34,7 @@
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
-
+import Auth from './auth.vue'
   Vue.use(VueFire)
 
 //If there is no firebase instance running, initialize the app
@@ -153,6 +142,12 @@ var db = firebase.database().ref('users/')
 </script>
 
 <style>
+.chat{
+    background: orange;
+}
+.bottom_input{
+    bottom: 0;
+}
 .user{
    list-style: none;
    display: inline-block;

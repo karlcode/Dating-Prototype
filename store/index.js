@@ -1,18 +1,14 @@
-export const state = {
-  user: null
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+const createStore = () => {
+  return new Vuex.Store({
+    state: {
+      counter: "asd"
+    },
+    mutations
+  })
 }
 
-export const mutations = {
-  SET_USER (state, user) {
-    state.user = user || null
-  }
-}
-
-export const getters = {
-  isAuthenticated (state) {
-    return !!state.user
-  },
-  loggedUser (state) {
-    return state.user
-  }
-}
+export default createStore

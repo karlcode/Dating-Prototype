@@ -4,7 +4,7 @@
       
       <div class="main_container">
       <h2>Find your next Sugar Daddy</h2>
-  
+
       <v-btn primary round router nuxt to="/inspire">See all the Dads</v-btn>
       </div>
     </v-flex>
