@@ -13,7 +13,7 @@
       <input type="text" v-model="newUser.name" placeholder="Message">
       <input type="submit" value="Add Message">
       </form>-->
-      
+      <v-flex xs8 offset-xs2>
       <div v-if="this.user !== ''">
       <p><strong>User logged in as {{user}}</strong></p>
       </div>
@@ -22,13 +22,17 @@
       <span>{{person}}</span>
         </li>
         </div>
-        
+        </v-flex>
       <input v-model="newMessage" @keyup.enter="addMessage" placeholder="Add message" />
-    
+      <v-flex xs6 offset-xs3>
       <v-text-field id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
-      <v-btn v-if="this.user.email == null" @click.native="handleSignUp">Create Account</v-btn>
-      <v-btn v-if="this.user.email == null" @click.native="login">Login</v-btn>
+      </v-flex>
+      <v-flex xs4 offset-xs4 v-if="this.user.email == null">
+      <v-btn  @click.native="handleSignUp">Create Account</v-btn>
+      <span> OR </span>
+      <v-btn  @click.native="login">Login</v-btn>
+      </v-flex>
       <v-btn v-if="this.user.email !== null" @click.native="signOut">Logout</v-btn>
 
       
