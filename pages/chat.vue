@@ -23,6 +23,7 @@
         </li>
         </div>
         </v-flex>
+        <span>{{this.$store.state}}</span>
       <input v-model="newMessage" class="bottom_input" @keyup.enter="addMessage" placeholder="Add message" />
           
 </v-layout>
@@ -35,6 +36,9 @@
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
 import Auth from './auth.vue'
+import Vuex from 'vuex' 
+import store from '../store'   
+Vue.use(Vuex)
   Vue.use(VueFire)
 
 //If there is no firebase instance running, initialize the app
@@ -45,6 +49,7 @@ if (!firebase.apps.length) {
 var db = firebase.database().ref('users/')
   //const messagesRef = db.ref('messages')
   export default {
+    store,
     data: () => ({
         newMessage: '',
          user: {
@@ -56,6 +61,7 @@ var db = firebase.database().ref('users/')
         persons: db
     },
     beforeCreate(){
+     
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
                 this.user = {
@@ -70,65 +76,10 @@ var db = firebase.database().ref('users/')
             }
         }.bind(this))
     },
+    mounted(){
+    console.log(this.$store)
+    },
     methods: {
-            handleSignUp: function() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            if (email.length < 4) {
-                alert('Please enter an email address.');
-                return;
-            }
-            if (password.length < 4) {
-                alert('Please enter a password.');
-                return;
-            }
-            // Sign in with email and pass.
-            // [START createwithemail]
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-            .catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // [START_EXCLUDE]
-                if (errorCode == 'auth/weak-password') {
-                alert('The password is too weak.');
-                } else {
-                alert(errorMessage);
-                }
-                console.log(error);
-                // [END_EXCLUDE]
-            });
-            // [END createwithemail]
-            email = ''
-            password = ''
-            },
-            login: function () {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if (errorCode == 'auth/invalid-email') {
-                alert('Invalid Email');
-                } else {
-                alert(errorMessage);
-                }
-            })
-            .then(console.log("Redirect here or some shit")
-            )
-            },
-            signOut: function() {
-                console.log("signoutFunction")
-                firebase.auth().signOut()
-                .then((user)=>{
-                     this.user.email = firebase.auth().currentUser;
-                    console.log(this.user)
-                    console.log("signOutThen")
-                }    
-                )
-            },
         addMessage: function(){
             if (this.newMessage.trim()) {
             db.push({
