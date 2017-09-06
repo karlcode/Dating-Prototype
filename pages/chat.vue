@@ -61,7 +61,6 @@ var db = firebase.database().ref('users/')
         persons: db
     },
     beforeCreate(){
-     
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
                 this.user = {

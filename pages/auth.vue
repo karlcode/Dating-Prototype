@@ -113,15 +113,7 @@ var db = firebase.database().ref('users/')
                     console.log("signOutThen")
                 }    
                 )
-            },
-        addMessage: function(){
-            if (this.newMessage.trim()) {
-            db.push({
-            message: this.newMessage
-          })
-          this.newMessage = ''
-        }
-    }
+            }
     }
   }
 </script>

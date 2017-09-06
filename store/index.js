@@ -4,8 +4,7 @@ Vue.use(Vuex)
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      counter: 0,
-      asdasf: 1
+      counter: 0
     },
     mutations: {
       increment (state) {
