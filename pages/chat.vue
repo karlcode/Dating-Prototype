@@ -13,14 +13,14 @@
       <input type="text" v-model="newUser.name" placeholder="Message">
       <input type="submit" value="Add Message">
       </form>-->
-      <v-flex xs8 offset-xs2>
+      <v-flex xs12>
       <div v-if="this.user !== ''">
       <p><strong>User logged in as {{user}}</strong></p>
       </div>
       <div>
-      <li v-for="person in persons" class="user" :key="person['.key']">
-      <span>{{person}}</span>
-        </li>
+      <div v-for="person in persons" class="user" :key="person['.key']">
+      <span class="user_message">{{person}}</span>
+        </div>
         </div>
         </v-flex>
         <span>{{this.$store.state}}</span>
@@ -94,13 +94,27 @@ var db = firebase.database().ref('users/')
 <style>
 .chat{
     background: orange;
+    height: 100%;
 }
 .bottom_input{
-    bottom: 0;
+    
+    position: fixed;
+    bottom: 50px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 50px;
+    z-index: 99;
+    background: aqua;
+    border: none;
+    outline: none;
+    padding-left: 55px;
+    padding-right: 55px;
+    color: #666;
+    font-weight: 400;
 }
 .user{
-   list-style: none;
-   display: inline-block;
+   display: block;
     background-color: #1998e6;
 	margin-bottom: 2px;
 	float: right;
@@ -108,5 +122,8 @@ var db = firebase.database().ref('users/')
 	font-size: 12px;
 	border-radius: 15px;
 	line-height: 1.4;
+}
+.user_message{
+    
 }
 </style>
