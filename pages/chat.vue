@@ -36,9 +36,7 @@
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
 import Auth from './auth.vue'
-import Vuex from 'vuex' 
-import store from '../store'   
-Vue.use(Vuex)
+import store from '../store';
   Vue.use(VueFire)
 
 //If there is no firebase instance running, initialize the app
@@ -74,9 +72,6 @@ var db = firebase.database().ref('users/')
             this.user = null
             }
         }.bind(this))
-    },
-    mounted(){
-    console.log(this.$store)
     },
     methods: {
         addMessage: function(){

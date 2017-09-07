@@ -1,17 +1,14 @@
 import Vue from 'vue'  
 import Vuex from 'vuex'
 Vue.use(Vuex)
-const createStore = () => {
-  return new Vuex.Store({
+
+export default new Vuex.Store({
     state: {
-      counter: 0
+      user: "Hey im the user"
     },
     mutations: {
       increment (state) {
-        state.counter++
+        state.user = "extreme"
       }
     }
-  })
-}
-
-export default createStore
+})

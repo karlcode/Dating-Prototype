@@ -30,7 +30,9 @@
       <v-toolbar-title><router-link to="/">Seeking Daddy</router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-      <v-btn flat>Login</v-btn>
+
+      <v-btn flat v-if="this.$store.state == null">Sign In</v-btn>
+      <v-btn flat v-else>{{this.$store.state}}</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
