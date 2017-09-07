@@ -4,11 +4,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-      user: "Hey im the user"
+      user: {
+        email: '',
+        key: ''
+      }
     },
     mutations: {
-      increment (state) {
-        state.user = "extreme"
+      increment (state, payload) {
+        state.user.email = payload.email
+        state.user.key = payload.key
       }
     }
 })

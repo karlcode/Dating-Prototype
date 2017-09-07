@@ -3,7 +3,7 @@
   <v-layout column >
         
       <v-flex xs4 offset-xs4 v-if="this.user.email == null">
-      <v-text-field id="email" placeholder='Email'/>
+      <v-text-field autofocus id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn  @click.native="handleSignUp">Create Account</v-btn>
       <span> OR </span>

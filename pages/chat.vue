@@ -14,9 +14,6 @@
       <input type="submit" value="Add Message">
       </form>-->
       <v-flex xs12>
-      <div v-if="this.user !== ''">
-      <p><strong>User logged in as {{user}}</strong></p>
-      </div>
       <div>
       <div v-for="person in persons" class="user" :key="person['.key']">
       <span class="user_message">{{person}}</span>
@@ -61,15 +58,18 @@ var db = firebase.database().ref('users/')
     beforeCreate(){
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
-                this.user = {
+                store.commit('increment', {
                     email: user.email,
                     key: user.uid
-                }
+                })
             }
             else {
             console.log("No user found")
             firebase.auth().signInAnonymously().catch(console.error)
-            this.user = null
+            store.commit('increment', {
+                    email: null,
+                    key: null
+                })
             }
         }.bind(this))
     },

@@ -10,7 +10,6 @@
     >
       <v-list>
         <v-list-tile 
-          router
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -27,12 +26,12 @@
     <v-toolbar fixed>
       
       
-      <v-toolbar-title><router-link to="/">Seeking Daddy</router-link></v-toolbar-title>
+      <v-toolbar-title>Seeking Daddy</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
 
-      <v-btn flat v-if="this.$store.state == null">Sign In</v-btn>
-      <v-btn flat v-else>{{this.$store.state}}</v-btn>
+      <v-btn flat v-if="this.$store.state.user.email == null" to="/auth">Sign In</v-btn>
+      <v-btn flat v-else>{{this.$store.state.user.email}}</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
