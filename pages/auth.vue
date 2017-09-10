@@ -10,7 +10,7 @@
       <v-btn  @click.native="login">Login</v-btn>
       </v-flex>
       <v-flex xs2 offset-xs5 v-else>
-      <v-btn  @click.native="signOut">Loout</v-btn>
+      <v-btn  @click.native="signOut">Logout</v-btn>
       </v-flex>
       </v-layout>
   </div>
@@ -101,8 +101,7 @@ var db = firebase.database().ref('users/')
                 alert(errorMessage);
                 }
             })
-            .then(console.log("Redirect here or some shit")
-            )
+            .then(this.$router.push({path: '/inspire'}))
             },
             signOut: function() {
                 console.log("signoutFunction")
