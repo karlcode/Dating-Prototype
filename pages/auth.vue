@@ -8,10 +8,13 @@
       <v-btn  @click.native="handleSignUp">Create Account</v-btn>
       <span> OR </span>
       <v-btn  @click.native="login">Login</v-btn>
+      <v-btn  @click.native="passwordReset">Forgot My Password</v-btn>
       </v-flex>
       <v-flex xs2 offset-xs5 v-else>
       <v-btn  @click.native="signOut">Logout</v-btn>
+      
       </v-flex>
+      
       </v-layout>
   </div>
 
@@ -102,6 +105,9 @@ var db = firebase.database().ref('users/')
                 }
             })
             .then(this.$router.push({path: '/inspire'}))
+            },
+            passwordReset: function(){
+               this.$router.push('/password-reset')
             },
             signOut: function() {
                 console.log("signoutFunction")
