@@ -2,12 +2,11 @@
 <div class="profile">
     <img alt="profile pic" width="500" height="500"/>
     <h1>{{user.email}}</h1>
-    <h1>{{user.key}}</h1>
     
     <h2>Bio: {{this.bioText}}</h2>
     <h3>Age: {{this.age}}</h3>
     <h3>Looking for a {{this.preference}}</h3>
-
+    <v-btn  @click.native="signOut">Logout</v-btn>
 </div>
 </template>
 
@@ -26,6 +25,6 @@
         user(){
             return this.$store.state.user
         }
-    }
+    },
   }
 </script>

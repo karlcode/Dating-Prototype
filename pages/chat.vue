@@ -49,7 +49,9 @@ var db = firebase.database().ref('users/')
         newMessage: '',
          user: {
              email: '',
-             key: ''
+             key: '',
+             photoURL: '',
+             displayName: ''
          }
     }),
     firebase: {
@@ -58,9 +60,12 @@ var db = firebase.database().ref('users/')
     beforeCreate(){
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
+                console.log(user)
                 store.commit('increment', {
                     email: user.email,
-                    key: user.uid
+                    key: user.uid,
+                    photoURL: user.photoURL,
+                    displayName: user.displayName
                 })
             }
             else {
