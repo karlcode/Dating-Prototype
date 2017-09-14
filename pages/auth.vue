@@ -8,6 +8,7 @@
       <v-btn  @click.native="handleSignUp">Create Account</v-btn>
       <span> OR </span>
       <v-btn  @click.native="login">Login</v-btn>
+      <v-btn  @click.native="loginWithFacebook">Facebook Login</v-btn>
       <v-btn  @click.native="passwordReset">Forgot My Password</v-btn>
       </v-flex>
       <v-flex xs2 offset-xs5 v-else>
@@ -53,7 +54,6 @@ var db = firebase.database().ref('users/')
             }
             else {
             console.log("No user found")
-            firebase.auth().signInAnonymously().catch(console.error)
             this.user = null
             }
         }.bind(this))
@@ -105,6 +105,30 @@ var db = firebase.database().ref('users/')
                 }
             })
             .then(this.$router.push({path: '/inspire'}))
+            },
+            loginWithFacebook: function(){
+                var provider = new firebase.auth.FacebookAuthProvider();
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                console.log(result)
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+                }).catch(function(error) {
+                // Handle Errors here.
+                console.log(error)
+                var errorCode = error.code;
+                
+                var errorMessage = error.message;
+                if(errorCode){
+                    alert(errorMessage)
+                }
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+                });
             },
             passwordReset: function(){
                this.$router.push('/password-reset')

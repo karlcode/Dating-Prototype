@@ -6,6 +6,8 @@
     <h2>Bio: {{this.bioText}}</h2>
     <h3>Age: {{this.age}}</h3>
     <h3>Looking for a {{this.preference}}</h3>
+    <p>PhotoURL: {{user.photoURL}}</p>
+    <p>DisplayName: {{user.displayName}}</p>
     <v-btn  @click.native="signOut">Logout</v-btn>
 </div>
 </template>
