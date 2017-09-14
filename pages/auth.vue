@@ -2,7 +2,7 @@
   <div id="firebaseui-auth-container">
   <v-layout column >
         
-      <v-flex xs4 offset-xs4 v-if="this.user.email == null">
+      <v-flex xs4 offset-xs4 >
       <v-text-field autofocus id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn  @click.native="handleSignUp">Create Account</v-btn>
@@ -11,7 +11,7 @@
       <v-btn  @click.native="loginWithFacebook">Facebook Login</v-btn>
       <v-btn  @click.native="passwordReset">Forgot My Password</v-btn>
       </v-flex>
-      <v-flex xs2 offset-xs5 v-else>
+      <v-flex xs2 offset-xs5>
       <v-btn  @click.native="signOut">Logout</v-btn>
       
       </v-flex>
@@ -47,6 +47,7 @@ var db = firebase.database().ref('users/')
     beforeCreate(){
         firebase.auth().onAuthStateChanged(function(user) {
             if (user){
+                console.log("USER:" + user.email)
                 this.user = {
                     email: user.email,
                     key: user.uid
@@ -54,7 +55,8 @@ var db = firebase.database().ref('users/')
             }
             else {
             console.log("No user found")
-            this.user = null
+            
+            
             }
         }.bind(this))
     },
@@ -137,8 +139,8 @@ var db = firebase.database().ref('users/')
                 console.log("signoutFunction")
                 firebase.auth().signOut()
                 .then((user)=>{
-                     this.user.email = firebase.auth().currentUser;
-                    console.log(this.user)
+                    
+                    console.log(user)
                     console.log("signOutThen")
                 }    
                 )

@@ -70,7 +70,6 @@ var db = firebase.database().ref('users/')
             }
             else {
             console.log("No user found")
-            firebase.auth().signInAnonymously().catch(console.error)
             store.commit('increment', {
                     email: null,
                     key: null
