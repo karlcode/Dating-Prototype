@@ -30,7 +30,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
 
-      <v-btn flat v-if="this.$store.state.user.email == null" to="/auth">Sign In</v-btn>
+      <v-btn flat v-if="!this.$store.state.user.email" to="/auth">Sign In</v-btn>
       <v-btn flat v-else to="/profile">{{this.$store.state.user.email}}</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>

@@ -2,7 +2,7 @@
   <div id="firebaseui-auth-container">
   <v-layout column >
         
-      <v-flex xs4 offset-xs4 >
+      <v-flex xs4 offset-xs4 v-if="!this.$store.state.user.email">
       <v-text-field autofocus id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn  @click.native="handleSignUp">Create Account</v-btn>
@@ -11,7 +11,7 @@
       <v-btn  @click.native="loginWithFacebook">Facebook Login</v-btn>
       <v-btn  @click.native="passwordReset">Forgot My Password</v-btn>
       </v-flex>
-      <v-flex xs2 offset-xs5>
+      <v-flex xs2 offset-xs5 v-else>
       <v-btn  @click.native="signOut">Logout</v-btn>
       
       </v-flex>
