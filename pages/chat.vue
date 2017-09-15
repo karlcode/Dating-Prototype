@@ -72,7 +72,9 @@ var db = firebase.database().ref('users/')
             console.log("No user found")
             store.commit('increment', {
                     email: null,
-                    key: null
+                    key: null,
+                    photoURL: null,
+                    displayName: null
                 })
             }
         }.bind(this))
