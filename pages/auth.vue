@@ -25,6 +25,7 @@
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
+  import store from '../store';
   Vue.use(VueFire)
   //If there is no firebase instance running, initialize the app
 if (!firebase.apps.length) {
@@ -34,6 +35,7 @@ if (!firebase.apps.length) {
 var db = firebase.database().ref('users/')
   //const messagesRef = db.ref('messages')
   export default {
+    store,
     data: () => ({
         newMessage: '',
          user: {
@@ -45,20 +47,7 @@ var db = firebase.database().ref('users/')
         persons: db
     },
     beforeCreate(){
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user){
-                console.log("USER:" + user.email)
-                this.user = {
-                    email: user.email,
-                    key: user.uid
-                }
-            }
-            else {
-            console.log("No user found")
-            
-            
-            }
-        }.bind(this))
+        store.dispatch('retrieveUser')
     },
     methods: {
             handleSignUp: function() {
@@ -117,33 +106,26 @@ var db = firebase.database().ref('users/')
                 // The signed-in user info.
                 var user = result.user;
                 // ...
+                
                 }).catch(function(error) {
                 // Handle Errors here.
-                console.log(error)
                 var errorCode = error.code;
                 
                 var errorMessage = error.message;
-                if(errorCode){
-                    alert(errorMessage)
-                }
+                
                 var email = error.email;
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
-                // ...
-                });
+                if(errorCode){
+                    alert(errorMessage)
+                }
+                })
             },
             passwordReset: function(){
                this.$router.push('/password-reset')
             },
-            signOut: function() {
-                console.log("signoutFunction")
-                firebase.auth().signOut()
-                .then((user)=>{
-                    
-                    console.log(user)
-                    console.log("signOutThen")
-                }    
-                )
+            signOut() {
+                store.dispatch('logoutUser')
             }
     }
   }

@@ -58,26 +58,7 @@ var db = firebase.database().ref('users/')
         persons: db
     },
     beforeCreate(){
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user){
-                console.log(user)
-                store.commit('increment', {
-                    email: user.email,
-                    key: user.uid,
-                    photoURL: user.photoURL,
-                    displayName: user.displayName
-                })
-            }
-            else {
-            console.log("No user found")
-            store.commit('increment', {
-                    email: null,
-                    key: null,
-                    photoURL: null,
-                    displayName: null
-                })
-            }
-        }.bind(this))
+        store.dispatch('retrieveUser')
     },
     methods: {
         addMessage: function(){

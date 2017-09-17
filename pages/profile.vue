@@ -1,20 +1,20 @@
 <template>
 <div class="profile">
-    <img alt="profile pic" width="500" height="500"/>
+    <img :src="user.photoURL" alt="profile pic" width="100" height="100"/>
     <h1>{{user.email}}</h1>
     
     <h2>Bio: {{this.bioText}}</h2>
     <h3>Age: {{this.age}}</h3>
     <h3>Looking for a {{this.preference}}</h3>
-    <p>PhotoURL: {{user.photoURL}}</p>
     <p>DisplayName: {{user.displayName}}</p>
-    <v-btn  @click.native="signOut">Logout</v-btn>
+    <v-btn error round @click.native="signOut">Logout</v-btn>
 </div>
 </template>
 
 <script>
-
+import store from '../store';
   export default {
+    store,
     data: () => ({
         newMessage: '',
         bioText: 'This is my bio',
@@ -22,6 +22,9 @@
         preference: 'Sugar baby'
     }),
     methods: {
+        signOut() {
+                store.dispatch('logoutUser')
+            }
     },
     computed: {
         user(){
