@@ -1,18 +1,6 @@
 <template>
 <div class="chat">
 <v-layout column >
-<!--<span>{{initName}}</span>
-      <form id="form" v-on:submit.prevent="initName">
-      <input type="text" v-model.lazy="initName" placeholder="Your name">
-      <input type="submit" value="Create Profile">
-      </form>
-      <li v-for="user in users" class="user" :key="user['.key']">
-      <span>{{user.name}}</span>
-      </li>
-      <form id="form" v-on:submit.prevent="addUser">
-      <input type="text" v-model="newUser.name" placeholder="Message">
-      <input type="submit" value="Add Message">
-      </form>-->
       <v-flex xs12>
       <div>
       <div v-for="person in persons" class="user" :key="person['.key']">
@@ -46,19 +34,10 @@ var db = firebase.database().ref('users/')
   export default {
     store,
     data: () => ({
-        newMessage: '',
-         user: {
-             email: '',
-             key: '',
-             photoURL: '',
-             displayName: ''
-         }
+        newMessage: ''
     }),
     firebase: {
         persons: db
-    },
-    beforeCreate(){
-        store.dispatch('retrieveUser')
     },
     methods: {
         addMessage: function(){

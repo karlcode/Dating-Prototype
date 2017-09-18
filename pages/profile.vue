@@ -24,6 +24,7 @@ import store from '../store';
     methods: {
         signOut() {
                 store.dispatch('logoutUser')
+                this.$router.push({path: '/'})
             }
     },
     computed: {

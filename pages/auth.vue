@@ -36,13 +36,6 @@ var db = firebase.database().ref('users/')
   //const messagesRef = db.ref('messages')
   export default {
     store,
-    data: () => ({
-        newMessage: '',
-         user: {
-             email: '',
-             key: ''
-         }
-    }),
     firebase: {
         persons: db
     },
