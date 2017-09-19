@@ -39,9 +39,6 @@ var db = firebase.database().ref('users/')
     firebase: {
         persons: db
     },
-    beforeCreate(){
-        store.dispatch('retrieveUser')
-    },
     methods: {
             handleSignUp: function() {
             var email = document.getElementById('email').value;
