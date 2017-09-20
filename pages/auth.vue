@@ -96,7 +96,8 @@ var db = firebase.database().ref('users/')
                 // The signed-in user info.
                 var user = result.user;
                 // ...
-                
+                //Localstorage on login for storing UID
+                localStorage.setItem('firebase:uid', user.uid);
                 }).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;

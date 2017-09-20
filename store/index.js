@@ -12,10 +12,24 @@ export default new Vuex.Store({
         displayName: ''
       }
     },
+    getters: {
+      getUser: state => {
+        return state.user
+      }
+    },
     mutations: {
+      setUser(state, user){
+        console.log(user)
+        state.user.key = user.uid
+        state.user.email = user.email
+        state.user.photoURL = user.photoURL
+        state.user.displayName = user.displayName
+      },
       retrieveUser(state) {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
+            console.log(localStorage)
+            localStorage.setItem('firebase:uid', user.uid)
             state.user.key = user.uid
             state.user.email = user.email
             state.user.photoURL = user.photoURL
@@ -36,6 +50,9 @@ export default new Vuex.Store({
       }
     },
     actions: {
+      setUser ({commit}, user){
+        commit('setUser', user)
+      },
       retrieveUser ({commit}){
         commit('retrieveUser')
       },

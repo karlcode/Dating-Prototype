@@ -10,8 +10,12 @@ if (process.BROWSER_BUILD) {
 const authUser = Object.keys(window.localStorage)
  .filter(item => item.startsWith('firebase:authUser'))[0]
  const user = authUser ? JSON.parse(localStorage.getItem(authUser)) : undefined;
- //store.commit('setUser' , user)
+
+    store.dispatch('retrieveUser')
+ 
+   
+
 }
 
-store.dispatch('retrieveUser')
+
 
