@@ -29,9 +29,10 @@ export default new Vuex.Store({
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             console.log(localStorage)
-            localStorage.setItem('firebase:uid', user.uid)
+            localStorage.setItem('firebase:email', user.email)
+            console.log(localStorage)
             state.user.key = user.uid
-            state.user.email = user.email
+            state.user.email = localStorage.getItem('firebase:email')
             state.user.photoURL = user.photoURL
             state.user.displayName = user.displayName
           } else {
