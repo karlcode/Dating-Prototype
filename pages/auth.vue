@@ -2,7 +2,7 @@
   <div id="firebaseui-auth-container">
   <v-layout column >
         
-      <v-flex xs4 offset-xs4 v-if="!this.$store.state.user.email">
+      <v-flex xs4 offset-xs4 v-if="!getUser.email">
       <v-text-field autofocus id="email" placeholder='Email'/>
       <v-text-field id="password" placeholder='Password'/>
       <v-btn round @click.native="handleSignUp">Create Account</v-btn>
@@ -38,6 +38,11 @@ var db = firebase.database().ref('users/')
     store,
     firebase: {
         persons: db
+    },
+    computed: {
+        getUser(){
+            return store.getters.getUser
+        }
     },
     methods: {
             handleSignUp: function() {
