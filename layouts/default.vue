@@ -73,7 +73,10 @@
     computed: {
         getUser(){
             return this.$store.getters.getUser
-        }
+        },
+        getUserId(){
+            return this.$store.getters.getUserId
+        },
     }
   }
 </script>

@@ -8,8 +8,8 @@ if (!firebase.apps.length) {
 
 if (process.BROWSER_BUILD) {
 const authUser = Object.keys(window.localStorage)
- .filter(item => item.startsWith('firebase:authUser'))[0]
- const user = authUser ? JSON.parse(localStorage.getItem(authUser)) : undefined;
+ .filter(item => item.startsWith('firebase:email'))[0]
+ const user = authUser ? localStorage.getItem(authUser) : undefined;
 console.log(user)
     store.dispatch('retrieveUser', user)
  

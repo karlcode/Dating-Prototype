@@ -15,7 +15,11 @@ export default new Vuex.Store({
     getters: {
       getUser(state) {
         return state.user
+      },
+      getUserId(){
+        return localStorage.getItem('firebase:email')
       }
+
     },
     mutations: {
       setUser(state, user){
@@ -26,6 +30,7 @@ export default new Vuex.Store({
         state.user.displayName = user.displayName
       },
       retrieveUser(state) {
+        console.log(localStorage.getItem('firebase:email'))
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             state.user.key = user.uid
