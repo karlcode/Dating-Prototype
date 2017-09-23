@@ -24,10 +24,7 @@ export default new Vuex.Store({
     mutations: {
       setUser(state, user){
         console.log(user)
-        state.user.key = user.uid
-        state.user.email = user.email
-        state.user.photoURL = user.photoURL
-        state.user.displayName = user.displayName
+        state.user.email = user
       },
       retrieveUser(state) {
         console.log(localStorage.getItem('firebase:email'))
