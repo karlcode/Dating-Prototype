@@ -1,8 +1,6 @@
 import Vue from 'vue'  
 import Vuex from 'vuex'
 import * as firebase from 'firebase'
-import createPersistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,21 +12,9 @@ export default new Vuex.Store({
         displayName: ''
       }
     },
-    plugins: [
-      createPersistedState({
-        storage: {
-          getItem: key => Cookies.get(key),
-          setItem: (key, value) => Cookies.set(key, value),
-          removeItem: key => Cookies.remove(key)
-        }
-      })
-    ],
     getters: {
       getUser(state) {
         return state.user
-      },
-      getUserId(){
-        return localStorage.getItem('firebase:email')
       }
 
     },
@@ -37,7 +23,6 @@ export default new Vuex.Store({
         state.user.email = user
       },
       retrieveUser(state) {
-        console.log(localStorage.getItem('firebase:email'))
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             state.user.key = user.uid
