@@ -1,6 +1,8 @@
 import Vue from 'vue'  
 import Vuex from 'vuex'
 import * as firebase from 'firebase'
+import createPersistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +14,15 @@ export default new Vuex.Store({
         displayName: ''
       }
     },
+    plugins: [
+      createPersistedState({
+        storage: {
+          getItem: key => Cookies.get(key),
+          setItem: (key, value) => Cookies.set(key, value),
+          removeItem: key => Cookies.remove(key)
+        }
+      })
+    ],
     getters: {
       getUser(state) {
         return state.user
@@ -23,7 +34,6 @@ export default new Vuex.Store({
     },
     mutations: {
       setUser(state, user){
-        console.log(user)
         state.user.email = user
       },
       retrieveUser(state) {

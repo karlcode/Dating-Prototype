@@ -9,15 +9,12 @@ if (!firebase.apps.length) {
     console.log(context)
   }
 if (process.BROWSER_BUILD) {
-    const authUser = Object.keys(window.localStorage)
-    const json = window.localStorage
+    const authUser = Object.keys(localStorage)
     const user = authUser ? localStorage.getItem('firebase:email') : undefined;
-    console.log(authUser)
-    console.log(json)
-    console.log(store.state.user)
+    console.log(localStorage)
+    console.log(user)
     //store.dispatch('retrieveUser', user)
     store.commit('setUser', user)
-    console.log(user)
 }
 
 
