@@ -29,9 +29,8 @@
       <v-toolbar-title>Seeking Daddy</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-
       <v-btn flat v-if="!getUser.email" to="/auth">Sign In</v-btn>
-      <v-btn flat v-else to="/profile">{{getUser.email}}</v-btn>
+      <v-btn flat v-else to="/profile"> <v-avatar><img :src="getUser.photoURL" alt="avatar"></v-avatar>{{getUser.email}}</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
