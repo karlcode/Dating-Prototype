@@ -36,12 +36,15 @@ var db = firebase.database().ref('chats/')
         newMessage: ''
     }),
     firebase: {
-        persons: firebase.database().ref('chats/')
+        persons: firebase.database().ref('chats/' + store.state.user.key )
     },
     methods: {
         addMessage: function(){
+            var key = firebase.database().ref('chats/' + store.state.user.key ).push().getKey()
+            console.log(key)
             if (this.newMessage.trim()) {
-            firebase.database().ref('chats/' + store.state.user.key ).push({
+            //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
+            firebase.database().ref('chats/' + store.state.user.key ).set({
             message: this.newMessage
           })
           this.newMessage = ''
