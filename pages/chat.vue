@@ -8,7 +8,6 @@
         </div>
         </div>
         </v-flex>
-        <span>{{this.$store.state}}</span>
       <input v-model="newMessage" class="bottom_input" @keyup.enter="addMessage" placeholder="Add message" />
           
 </v-layout>
@@ -29,7 +28,7 @@ if (!firebase.apps.length) {
    firebase.initializeApp(config)
 }
 
-var db = firebase.database().ref('users/')
+var db = firebase.database().ref('chats/')
   //const messagesRef = db.ref('messages')
   export default {
     store,
@@ -37,12 +36,12 @@ var db = firebase.database().ref('users/')
         newMessage: ''
     }),
     firebase: {
-        persons: db
+        persons: firebase.database().ref('chats/')
     },
     methods: {
         addMessage: function(){
             if (this.newMessage.trim()) {
-            db.push({
+            firebase.database().ref('chats/' + store.state.user.key ).push({
             message: this.newMessage
           })
           this.newMessage = ''
