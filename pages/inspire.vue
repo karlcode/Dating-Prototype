@@ -12,8 +12,42 @@
        </v-layout>
    
         
-     
         <v-container fluid grid-list-md class="grey lighten-4">
+        
+        <v-layout row wrap>
+          <v-flex
+            v-for="user in users"
+            :key="user.key"
+            xs4
+          >
+            <v-card >
+              <a :href=" user.photoURL ">
+              <v-card-media
+                :src="user.photoURL"
+                height="200px"
+              >
+              </v-card-media>
+              </a>
+              <v-card-title primary-title>
+              <div>
+                <span class="headline" v-text="user.displayName"></span>
+              </div>
+              <v-card-actions class="white">
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>favorite</v-icon>
+                </v-btn>
+              </v-card-actions>
+              </v-card-title>
+            
+            </v-card>
+          
+          </v-flex>
+          
+        </v-layout>
+      </v-container>
+        <v-container fluid grid-list-md class="grey lighten-4">
+        
         <v-layout row wrap>
           <v-flex
             v-bind="{ [`xs${card.flex}`]: true }"
@@ -55,12 +89,23 @@
 
 <script>
   const axios = require('axios')
-
+   import Vue from 'vue'
+  import firebase from "firebase";
+  import VueFire from 'vuefire';
+  import {config} from '../plugins/firebase'
+  import store from '../store';
+  Vue.use(VueFire)
+  if (!firebase.apps.length) {
+   firebase.initializeApp(config)
+}
   export default {
     data: () => ({
       cards: [],
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
+    firebase: {
+        users: firebase.database().ref('user/')
+    },
     mounted() {
       axios.get('https://randomuser.me/api/?results=50&gender=male')
       .then(response =>  {

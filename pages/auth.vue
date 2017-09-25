@@ -60,9 +60,10 @@ var db = firebase.database().ref('users/')
             // [START createwithemail]
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function(result){
-            console.log(result)
             firebase.database().ref('user/').child(result.uid).set({
-            email: result.email
+            email: result.email,
+            photoURL: result.photoURL,
+            displayName: result.displayName,
             })
             })
             .catch(function(error) {
@@ -109,8 +110,10 @@ var db = firebase.database().ref('users/')
                 // ...
                 //Localstorage on login for storing UID
                 
-                firebase.database().ref('user/').push({
-                asd: user
+                firebase.database().ref('user/').child(result.user.uid).set({
+                email: result.user.email,
+                photoURL: result.user.photoURL,
+                displayName: result.user.displayName,
                 })
                 }).catch(function(error) {
                 // Handle Errors here.
