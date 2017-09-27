@@ -96,10 +96,12 @@ if (!firebase.apps.length) {
   border-bottom-right-radius: 5px;
 }
 .user:first-of-type {
-  border-top-right-radius: 25px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 5px;
 }
 .user:last-of-type {
-  border-bottom-right-radius: 25px;
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 5px;
 }
 .user_message{
     
