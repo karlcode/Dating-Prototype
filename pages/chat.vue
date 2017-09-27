@@ -1,17 +1,27 @@
 <template>
+<v-container grid-list-md text-xs-center>
 <div class="chat">
 <v-layout column >
       <v-flex xs12>
       <div>
       <div v-for="person in persons" class="user" :key="person['.key']">
-      <span class="user_message">{{person}}</span>
+      <div class="user_message"> 
+      <span >{{person.message}}</span>
+      </div>
         </div>
         </div>
         </v-flex>
-      <input v-model="newMessage" class="bottom_input" @keyup.enter="addMessage" placeholder="Add message" />
-          
+       <v-form v-model="newMessage" name="hello">
+        <v-text-field
+          class="bottom_input"
+          @keyup.enter.native="addMessage" 
+          v-model="newMessage"
+          single-line
+        ></v-text-field>
+        </v-form>   
 </v-layout>
 </div>
+</v-container>
 </template>
 
 <script>
@@ -19,17 +29,14 @@
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
-import Auth from './auth.vue'
-import store from '../store';
+  import Auth from './auth.vue'
+  import store from '../store';
   Vue.use(VueFire)
 
 //If there is no firebase instance running, initialize the app
 if (!firebase.apps.length) {
    firebase.initializeApp(config)
 }
-
-var db = firebase.database().ref('chats/')
-  //const messagesRef = db.ref('messages')
   export default {
     store,
     data: () => ({
@@ -44,7 +51,7 @@ var db = firebase.database().ref('chats/')
             console.log(key)
             if (this.newMessage.trim()) {
             //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
-            firebase.database().ref('chats/' + store.state.user.key ).set({
+            firebase.database().ref('chats/' + store.state.user.key ).push({
             message: this.newMessage
           })
           this.newMessage = ''
@@ -56,35 +63,43 @@ var db = firebase.database().ref('chats/')
 
 <style>
 .chat{
-    background: orange;
+    background: beige;
     height: 100%;
 }
 .bottom_input{
-    
     position: fixed;
     bottom: 50px;
     left: 0px;
     right: 0px;
-    width: 100%;
     height: 50px;
-    z-index: 99;
-    background: aqua;
     border: none;
     outline: none;
     padding-left: 55px;
     padding-right: 55px;
-    color: #666;
     font-weight: 400;
+    background: #C6c6c6;
 }
 .user{
-   display: block;
-    background-color: #1998e6;
+  display:inline-block;
+  clear: both;
+  display: block;
+  background-color: #1998e6;
 	margin-bottom: 2px;
 	float: right;
 	padding: 7px 13px;
 	font-size: 12px;
 	border-radius: 15px;
 	line-height: 1.4;
+}
+.user + .user{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.user:first-of-type {
+  border-top-right-radius: 25px;
+}
+.user:last-of-type {
+  border-bottom-right-radius: 25px;
 }
 .user_message{
     
