@@ -27,7 +27,7 @@ export default new Vuex.Store({
           if (user) {
             state.user.key = user.uid
             state.user.email = user.email
-            state.user.photoURL = user.photoURL
+            state.user.photoURL = "https://graph.facebook.com/" + user.providerData[0].uid + "/picture?height=500"
             state.user.displayName = user.displayName
           } else {
             state.user.key = null

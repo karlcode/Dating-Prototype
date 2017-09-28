@@ -24,7 +24,7 @@
               <a :href=" user.photoURL ">
               <v-card-media
                 :src="user.photoURL"
-                height="200px"
+                height="350px"
               >
               </v-card-media>
               </a>
