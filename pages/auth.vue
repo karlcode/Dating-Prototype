@@ -109,10 +109,11 @@ var db = firebase.database().ref('users/')
                 var user = result.user;
                 // ...
                 //Localstorage on login for storing UID
+                console.log(user.providerData[0].uid)
                 
                 firebase.database().ref('user/').child(result.user.uid).set({
                 email: result.user.email,
-                photoURL: result.user.photoURL,
+                photoURL: "https://graph.facebook.com/" + user.providerData[0].uid + "/picture?height=500",
                 displayName: result.user.displayName,
                 })
                 }).catch(function(error) {
