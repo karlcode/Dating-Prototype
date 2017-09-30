@@ -1,7 +1,7 @@
 <template>
-  <v-layout column >
+  <v-layout row >
      
-      <v-flex xs10 offset-xs1>
+      <v-flex xs9 >
       <v-layout row>
       <v-flex xs9 >
       <h2 class="text-xs-left">Daddies</h2>
@@ -24,7 +24,7 @@
               <a :href=" user.photoURL ">
               <v-card-media
                 :src="user.photoURL"
-                height="350px"
+                height="400px"
               >
               </v-card-media>
               </a>
@@ -48,16 +48,20 @@
       </v-container>
         
       </v-flex>
+      <v-flex>
+      <UserList></UserList>
+      </v-flex>
     </v-layout>
 </template>
 
 <script>
   const axios = require('axios')
-   import Vue from 'vue'
+  import Vue from 'vue'
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
   import store from '../store';
+  import UserList from '../components/UserList'
   Vue.use(VueFire)
   if (!firebase.apps.length) {
    firebase.initializeApp(config)
@@ -67,6 +71,9 @@
       cards: [],
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
+    components: {
+      UserList,
+    },
     firebase: {
         users: firebase.database().ref('user/')
     }
