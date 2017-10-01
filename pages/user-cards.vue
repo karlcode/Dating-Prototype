@@ -1,7 +1,7 @@
 <template>
   <v-layout row >
      
-      <v-flex xs9 >
+      <v-flex xs9>
       <v-layout row>
       <v-flex xs9 >
       <h2 class="text-xs-left">Daddies</h2>
@@ -48,14 +48,13 @@
       </v-container>
         
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
       <UserList></UserList>
       </v-flex>
     </v-layout>
 </template>
 
 <script>
-  const axios = require('axios')
   import Vue from 'vue'
   import firebase from "firebase";
   import VueFire from 'vuefire';
