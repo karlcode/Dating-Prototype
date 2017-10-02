@@ -20,11 +20,12 @@
             :key="user.key"
             xs4
           >
-            <v-card>
-              <a :href=" user.photoURL ">
+            <v-card v-on:click="newChat">
+              
               <v-card-media
                 :src="user.photoURL"
-                height="400px"
+                height="350px"
+                
               >
               </v-card-media>
               </a>
@@ -64,12 +65,17 @@
   Vue.use(VueFire)
   if (!firebase.apps.length) {
    firebase.initializeApp(config)
-}
+  }
   export default {
     data: () => ({
       cards: [],
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
+    methods: {
+      newChat: function(){
+        firebase.database().ref('chats/' + store.state.user.key).child('user').set(store.state.user.email)
+      }
+    },
     components: {
       UserList,
     },

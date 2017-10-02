@@ -43,15 +43,13 @@ if (!firebase.apps.length) {
         newMessage: ''
     }),
     firebase: {
-        persons: firebase.database().ref('chats/' + store.state.user.key )
+        persons: firebase.database().ref('chats/' + store.state.user.key ).child('messages')
     },
     methods: {
         addMessage: function(){
-            var key = firebase.database().ref('chats/' + store.state.user.key ).push().getKey()
-            console.log(key)
             if (this.newMessage.trim()) {
             //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
-            firebase.database().ref('chats/' + store.state.user.key ).push({
+            firebase.database().ref('chats/' + store.state.user.key ).child('messages').push({
             message: this.newMessage
           })
           this.newMessage = ''
