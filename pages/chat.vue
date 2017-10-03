@@ -47,10 +47,14 @@ if (!firebase.apps.length) {
     },
     methods: {
         addMessage: function(){
+            var date = new Date();
+            var timestamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
             if (this.newMessage.trim()) {
             //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
             firebase.database().ref('chats/' + store.state.user.key ).child('messages').push({
-            message: this.newMessage
+            message: this.newMessage,
+            time: timestamp,
+            user: store.state.user.key
           })
           this.newMessage = ''
         }
