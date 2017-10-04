@@ -9,7 +9,7 @@
     </v-toolbar>
     <v-list two-line>
       <template v-for="(user, index) in users">
-        <v-list-tile avatar ripple v-bind:key="index" @click="">
+        <v-list-tile avatar ripple v-bind:key="index" router nuxt href="/chat">
           <v-list-tile-content>
             <v-list-tile-title>{{ user.displayName }}</v-list-tile-title>
             <v-list-tile-sub-title>{{ user.email  }}</v-list-tile-sub-title>
