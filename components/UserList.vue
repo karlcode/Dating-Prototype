@@ -8,17 +8,17 @@
       </v-btn>
     </v-toolbar>
     <v-list two-line>
-      <template v-for="(user, index) in users">
+      <template v-for="(chat, index) in chats">
         <v-list-tile avatar ripple v-bind:key="index" router nuxt href="/chat">
           <v-list-tile-content>
-            <v-list-tile-title>{{ user.displayName }}</v-list-tile-title>
-            <v-list-tile-sub-title>{{ user.email  }}</v-list-tile-sub-title>
+            <v-list-tile-title>{{ chat.user}}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ chat.user }}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-list-tile-action-text>{{ user.email  }}</v-list-tile-action-text>
+            <v-list-tile-action-text>{{ chat.last}}</v-list-tile-action-text>
           </v-list-tile-action>
         </v-list-tile>
-        <v-divider v-if="index + 1 < users.length"></v-divider>
+        <v-divider v-if="index + 1 < chats.length"></v-divider>
       </template>
     </v-list>
   </v-card>
@@ -29,13 +29,14 @@
   import firebase from "firebase";
   import VueFire from 'vuefire';
   import {config} from '../plugins/firebase'
+  import store from '../store';
   Vue.use(VueFire)
   if (!firebase.apps.length) {
    firebase.initializeApp(config)
   }
   export default {
     firebase: {
-        users: firebase.database().ref('user/')
+        chats: firebase.database().ref('chats/')
     }
   }
 </script>

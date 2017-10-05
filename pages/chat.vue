@@ -6,7 +6,8 @@
       <div>
       <div v-for="person in persons" class="user" :key="person['.key']">
       <div class="user_message"> 
-      <span >{{person.message}}</span>
+      <div >{{person.message}}</div>
+      <time >{{person.time}}</time>
       </div>
         </div>
         </div>
@@ -43,7 +44,7 @@ if (!firebase.apps.length) {
         newMessage: ''
     }),
     firebase: {
-        persons: firebase.database().ref('chats/' + store.state.user.key ).child('messages')
+        persons: firebase.database().ref('messages/' + store.state.user.key)
     },
     methods: {
         addMessage: function(){
@@ -51,12 +52,16 @@ if (!firebase.apps.length) {
             var timestamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
             if (this.newMessage.trim()) {
             //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
-            firebase.database().ref('chats/' + store.state.user.key ).child('messages').push({
+            firebase.database().ref('messages/' + store.state.user.key).push({
             message: this.newMessage,
             time: timestamp,
-            user: store.state.user.key
-          })
-          this.newMessage = ''
+            sender: store.state.user.key
+            })
+            //timestamp recording last time each user read chat
+            console.log(firebase.database().ref('messages/').child(store.state.user.key).orderByKey().limitToLast(1))
+            //firebase.database().ref('chats/').child(store.state.user.key).set({last: message})
+            firebase.database().ref('user-chats/').child(store.state.user.key).set({chatUID: 'Hey'})
+            this.newMessage = ''
         }
     }
     }

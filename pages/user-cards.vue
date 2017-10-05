@@ -76,8 +76,7 @@
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         firebase.database().ref('chats/' + store.state.user.key).child('user').set(store.state.user.email)
-        //timestamp recording last time each user read chat
-        firebase.database().ref('chats/' + store.state.user.key).child('last').set(time)
+        
       }
     },
     components: {
