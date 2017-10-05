@@ -58,7 +58,11 @@ if (!firebase.apps.length) {
             sender: store.state.user.key
             })
             //timestamp recording last time each user read chat
-            console.log(firebase.database().ref('messages/').child(store.state.user.key).orderByKey().limitToLast(1))
+            var change = firebase.database().ref('messages/').child(store.state.user.key).orderByKey().limitToLast(1)
+            console.log(change)
+            change.on('value', function(snapshot){
+              console.log(snapshot)
+            })
             //firebase.database().ref('chats/').child(store.state.user.key).set({last: message})
             firebase.database().ref('user-chats/').child(store.state.user.key).set({chatUID: 'Hey'})
             this.newMessage = ''
