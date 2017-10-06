@@ -1,22 +1,9 @@
-# testing
+# Online Dating Project - Work In Progress
 
-> Nuxt.js + Vuetify.js project
+> This is a Nuxt.js + Vuetify.js project developed on top of the Vue library. I aim to develop a performant 1:1 chat room based web app which personally challenges the limits of my development knowledge. 
 
-## Build Setup
+> I hope this project seeks to emulate the best features of online dating websites while being partially inspired in design by sites such as Messenger.com. 
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+> This project uses Firebase for a real-time database and authentication in order to bootstrap the backend and manage user accounts and chat-rooms. 
 
-# serve with hot reload at localhost:3000
-$ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out the [Nuxt.js](https://github.com/nuxt/nuxt.js) and [Vuetify.js](https://vuetifyjs.com/) documentation.
