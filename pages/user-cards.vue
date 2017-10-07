@@ -17,7 +17,7 @@
         <v-layout row wrap>
           <v-flex
             v-for="user in users"
-            :key="user.key"
+            v-bind:key="user.key"
             xs4
           >
             <v-card v-on:click="newChat">
@@ -72,7 +72,8 @@
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
     methods: {
-      newChat: function(){
+      newChat: (key)=>{
+        console.log(key)
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         firebase.database().ref('chats/' + store.state.user.key).child('user').set(store.state.user.email)
