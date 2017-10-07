@@ -17,10 +17,10 @@
         <v-layout row wrap>
           <v-flex
             v-for="user in users"
-            v-bind:key="user.key"
+            :key="user.key"
             xs4
           >
-            <v-card v-on:click="newChat">
+            <v-card v-on:click="newChat(user)">
               
               <v-card-media
                 :src="user.photoURL"
@@ -72,11 +72,15 @@
       dropdown_filter: ['Age (Young to Old)', 'Age (Old to Young)', 'Popular'],
     }),
     methods: {
-      newChat: (key)=>{
-        console.log(key)
+      newChat: (user)=>{
+        var myUser = store.state.user.key
+        var otherUser = user['.key']
+        var roomName = myUser<otherUser ? myUser+'_'+otherUser : otherUser+'_'+myUser;
+        console.log(roomName)
+        firebase.database().ref('user-chats/').child(myUser).push(roomName)
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        firebase.database().ref('chats/' + store.state.user.key).child('user').set(store.state.user.email)
+        firebase.database().ref('chats/').child(roomName).set({last: time})
         
       }
     },
