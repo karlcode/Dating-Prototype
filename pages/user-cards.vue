@@ -77,9 +77,10 @@
         var otherUser = user['.key']
         var roomName = myUser<otherUser ? myUser+'_'+otherUser : otherUser+'_'+myUser;
         console.log(roomName)
-        firebase.database().ref('user-chats/').child(myUser).push(roomName)
+        
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        firebase.database().ref('user-chats/').child(myUser).child(roomName).set({created: time})
         firebase.database().ref('chats/').child(roomName).set({last: time})
         
       }
