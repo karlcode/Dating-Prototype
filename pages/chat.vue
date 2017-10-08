@@ -43,6 +43,9 @@ if (!firebase.apps.length) {
     data: () => ({
         newMessage: ''
     }),
+    beforeCreate: ()=>{
+      //get listener for chatroom name, store to state and then retrieve list
+    },
     firebase: {
         persons: firebase.database().ref('messages/' + store.state.user.key)
     },
@@ -58,10 +61,9 @@ if (!firebase.apps.length) {
             sender: store.state.user.key
             })
             //timestamp recording last time each user read chat
-            var change = firebase.database().ref('messages/').child(store.state.user.key).orderByKey().limitToLast(1)
-            console.log(change)
-            change.on('value', function(snapshot){
-              console.log(snapshot)
+            var change = firebase.database().ref('messages/').child(store.state.user.key).orderByValue().limitToLast(1)
+            change.on("value", function(snapshot){
+            console.log(snapshot.val())
             })
             //firebase.database().ref('chats/').child(store.state.user.key).set({last: message})
             firebase.database().ref('user-chats/').child(store.state.user.key).set({chatUID: 'Hey'})

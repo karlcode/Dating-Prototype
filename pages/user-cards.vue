@@ -81,8 +81,7 @@
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         firebase.database().ref('user-chats/').child(myUser).child(roomName).set({created: time})
-        firebase.database().ref('chats/').child(roomName).set({last: time})
-        
+        firebase.database().ref('chats/').child(roomName).set({last: time, members: {myUser, otherUser}})
       }
     },
     components: {
