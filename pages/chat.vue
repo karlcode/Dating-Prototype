@@ -60,13 +60,12 @@ if (!firebase.apps.length) {
             time: timestamp,
             sender: store.state.user.key
             })
-            //timestamp recording last time each user read chat
-            var change = firebase.database().ref('messages/').child(store.state.user.key).orderByValue().limitToLast(1)
-            change.on("value", function(snapshot){
-            console.log(snapshot.val())
-            })
-            //firebase.database().ref('chats/').child(store.state.user.key).set({last: message})
-            firebase.database().ref('user-chats/').child(store.state.user.key).set({chatUID: 'Hey'})
+            //child route should be a passed prop from parent component
+            firebase.database().ref('chats/').child('HLqXM0I9KsYuj82rqN1cPii62xb2_HLqXM0I9KsYuj82rqN1cPii62xb2')
+            .set({
+            message: this.newMessage,
+            last: timestamp,
+            sender: store.state.user.key})
             this.newMessage = ''
         }
     }

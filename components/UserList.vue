@@ -11,11 +11,11 @@
       <template v-for="(chat, index) in chats">
         <v-list-tile avatar ripple v-bind:key="index" router nuxt href="/chat">
           <v-list-tile-content>
-            <v-list-tile-title>{{ chat.user}}</v-list-tile-title>
-            <v-list-tile-sub-title>{{ chat.user }}</v-list-tile-sub-title>
+            <v-list-tile-title>{{ chat.sender }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ chat.message }}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-list-tile-action-text>{{ chat.last}}</v-list-tile-action-text>
+            <v-list-tile-action-text>{{ chat.last }}</v-list-tile-action-text>
           </v-list-tile-action>
         </v-list-tile>
         <v-divider v-if="index + 1 < chats.length"></v-divider>
@@ -37,6 +37,13 @@
   export default {
     firebase: {
         chats: firebase.database().ref('chats/')
+    },
+    beforeCreate: function(){
+      //timestamp recording last time each user read chat
+          var change = firebase.database().ref('messages/').child(store.state.user.key).orderByValue().limitToLast(1)
+          change.on('child_added', function(snapshot){
+            console.log(snapshot)
+          })
     }
   }
 </script>
