@@ -14,7 +14,7 @@
     </v-toolbar>
     <v-list two-line>
       <template v-for="(chat, index) in chats">
-      <nuxt-link to="/conversation/chat">
+      <nuxt-link :to="{ path: '/conversation/chat', params: { chatroom: chat }}">
         <v-list-tile avatar ripple v-bind:key="index">
           <v-list-tile-content>
             <v-list-tile-title>{{ chat.sender }}</v-list-tile-title>
