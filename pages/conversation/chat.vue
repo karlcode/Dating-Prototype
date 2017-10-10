@@ -43,11 +43,16 @@ if (!firebase.apps.length) {
     data: () => ({
         newMessage: ''
     }),
+    asyncData(context){
+      var props = context.query.chatroom
+      return {chatID: props['.key']}
+    },
     beforeCreate: ()=>{
       //get listener for chatroom name, store to state and then retrieve list
     },
-    firebase: {
-        persons: firebase.database().ref('messages/' + store.state.user.key)
+    firebase() {
+      return  {persons: firebase.database().ref('messages/').child(this.chatID)}
+        
     },
     methods: {
         addMessage: function(){
@@ -55,13 +60,13 @@ if (!firebase.apps.length) {
             var timestamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
             if (this.newMessage.trim()) {
             //firebase.database().ref('chats/' + store.state.user.key ).push({message: this.newMessage})
-            firebase.database().ref('messages/' + store.state.user.key).push({
+            firebase.database().ref('messages/').child(this.chatID).push({
             message: this.newMessage,
             time: timestamp,
             sender: store.state.user.key
             })
             //child route should be a passed prop from parent component
-            firebase.database().ref('chats/').child('HLqXM0I9KsYuj82rqN1cPii62xb2_HLqXM0I9KsYuj82rqN1cPii62xb2')
+            firebase.database().ref('chats/').child(this.chatID)
             .set({
             message: this.newMessage,
             last: timestamp,
