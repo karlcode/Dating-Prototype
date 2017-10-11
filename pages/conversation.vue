@@ -1,7 +1,7 @@
 <template>
 <v-layout row>
 <v-flex xs9>
-<nuxt-child/>
+<nuxt-child :key="$route"/>
 </v-flex>
 <v-flex xs3>
  <v-card>

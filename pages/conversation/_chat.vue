@@ -53,8 +53,11 @@ if (!firebase.apps.length) {
         //persons: firebase.database().ref('messages/').child(this.chatID)
         //}
     //},
-    mounted () {
+    created () {
       this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
+      //OR use $route.params.chat instead of this.chatID
+      //this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
+      console.log(this.persons)
     },
     methods: {
         addMessage: function(){
