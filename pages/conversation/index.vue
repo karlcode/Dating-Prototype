@@ -73,7 +73,7 @@
         var otherUser = user['.key']
         var roomName = myUser<otherUser ? myUser+'_'+otherUser : otherUser+'_'+myUser;
         console.log(roomName)
-        
+        // send request invite
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         // list all chatroomIds that a userId is part of

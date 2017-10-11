@@ -41,18 +41,20 @@ if (!firebase.apps.length) {
   export default {
     store,
     data: () => ({
-        newMessage: ''
+        newMessage: '',
+        chatID: []
     }),
     asyncData(context){
-      var props = context.query.chatroom
-      return {chatID: props['.key']}
+      console.log(context)
+      return {chatID: context.params.chat}
     },
-    beforeCreate: ()=>{
-      //get listener for chatroom name, store to state and then retrieve list
-    },
-    firebase() {
-      return  {persons: firebase.database().ref('messages/').child(this.chatID)}
-        
+    //firebase(){
+      //return  {
+        //persons: firebase.database().ref('messages/').child(this.chatID)
+        //}
+    //},
+    mounted () {
+      this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
     },
     methods: {
         addMessage: function(){
