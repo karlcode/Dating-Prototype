@@ -48,17 +48,16 @@ if (!firebase.apps.length) {
       console.log(context)
       return {chatID: context.params.chat}
     },
-    //firebase(){
-      //return  {
-        //persons: firebase.database().ref('messages/').child(this.chatID)
-        //}
-    //},
-    created () {
-      this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
+    firebase(){
+      return  {
+        persons: firebase.database().ref('messages/').child(this.chatID)
+        }
+    },
+    //created () {
+      //this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
       //OR use $route.params.chat instead of this.chatID
       //this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
-      console.log(this.persons)
-    },
+    //},
     methods: {
         addMessage: function(){
             var date = new Date();
@@ -71,7 +70,7 @@ if (!firebase.apps.length) {
             sender: store.state.user.key
             })
             //child route should be a passed prop from parent component
-            firebase.database().ref('chats/').child(this.chatID)
+            firebase.database().ref('user-chats/').child(store.state.user.key).child(this.chatID)
             .set({
             message: this.newMessage,
             last: timestamp,
