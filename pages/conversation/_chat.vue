@@ -4,10 +4,10 @@
 <v-layout column >
       <v-flex xs12>
       <div>
-      <div v-for="person in persons" class="user" :key="person['.key']">
+      <div v-for="message in messages" class="user" :key="message['.key']">
       <div class="user_message"> 
-      <div >{{person.message}}</div>
-      <time >{{person.time}}</time>
+      <div >{{message.message}}</div>
+      <time >{{message.time}}</time>
       </div>
         </div>
         </div>
@@ -50,7 +50,7 @@ if (!firebase.apps.length) {
     },
     firebase(){
       return  {
-        persons: firebase.database().ref('messages/').child(this.chatID)
+        messages: firebase.database().ref('messages/').child(this.chatID)
         }
     },
     //created () {
