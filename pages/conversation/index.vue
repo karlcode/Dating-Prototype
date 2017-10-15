@@ -72,13 +72,13 @@
         var myUser = store.state.user.key
         var otherUser = user['.key']
         var roomName = myUser<otherUser ? myUser+'_'+otherUser : otherUser+'_'+myUser;
-        console.log(roomName)
+        console.log(user)
         // send request invite
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         // list all chatroomIds that a userId is part of
-        firebase.database().ref('user-chats/').child(myUser).child(roomName).set({sender: myUser, message: 'I just started a convo', last: time})
-        firebase.database().ref('user-chats/').child(otherUser).child(roomName).set({sender: myUser, message: 'He has just initiated a convo with you', last: time})
+        firebase.database().ref('user-chats/').child(myUser).child(roomName).update({sender: myUser, last: time, name: user.displayName})
+        firebase.database().ref('user-chats/').child(otherUser).child(roomName).update({sender: myUser, last: time})
       }
     },
     firebase: {

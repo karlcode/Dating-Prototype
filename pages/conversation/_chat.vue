@@ -9,7 +9,7 @@
       <div >{{message.message}}</div>
       <time >{{message.time}}</time>
       </div>
-        </div>
+      </div>
         </div>
         </v-flex>
        <v-form v-model="newMessage" name="hello">
@@ -71,10 +71,9 @@ if (!firebase.apps.length) {
             })
             //child route should be a passed prop from parent component
             firebase.database().ref('user-chats/').child(store.state.user.key).child(this.chatID)
-            .set({
+            .update({
             message: this.newMessage,
-            last: timestamp,
-            sender: store.state.user.key})
+            last: timestamp})
             this.newMessage = ''
         }
     }

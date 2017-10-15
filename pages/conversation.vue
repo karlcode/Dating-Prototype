@@ -17,7 +17,7 @@
       <nuxt-link :to="{ name: 'conversation-chat', params: { chat: chat['.key'] }}">
         <v-list-tile avatar ripple v-bind:key="index">
           <v-list-tile-content>
-            <v-list-tile-title>{{ chat.sender }}</v-list-tile-title>
+            <v-list-tile-title>{{ chat.name }}</v-list-tile-title>
             <v-list-tile-sub-title>{{ chat.message }}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
