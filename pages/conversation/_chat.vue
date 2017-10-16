@@ -83,7 +83,7 @@ if (!firebase.apps.length) {
 
 <style>
 .chat{
-    background: beige;
+    background: #f7f7f7;
     height: 100%;
 }
 .bottom_input{
