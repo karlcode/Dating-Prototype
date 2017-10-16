@@ -3,14 +3,25 @@
 <div class="chat">
 <v-layout column >
       <v-flex xs12>
-      <div>
-      <div v-for="message in messages" class="user" :key="message['.key']">
-      <div class="user_message"> 
-      <div >{{message.message}}</div>
-      <time >{{message.time}}</time>
+      <div v-for="message in messages" :key="message['.key']">
+          <div v-if="match(message.sender)">
+            <div class="user" >
+              <div class="user_message"> 
+                <div >{{message.message}}</div>
+                <time >{{message.time}}</time>
+              </div>
+            </div> 
+          </div>
+          <div v-else>
+            <div class="client" >
+              <div class="client_message"> 
+                <div >{{message.message}}</div>
+                <time >{{message.time}}</time>
+              </div>
+            </div> 
+          </div>
+         
       </div>
-      </div>
-        </div>
         </v-flex>
        <v-form v-model="newMessage" name="hello">
         <v-text-field
@@ -59,6 +70,9 @@ if (!firebase.apps.length) {
       //this.$bindAsObject('persons', firebase.database().ref('messages/' + this.chatID))
     //},
     methods: {
+        match: function(name){
+          return name == store.state.user.key
+        },
         addMessage: function(){
             var date = new Date();
             var timestamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -83,21 +97,20 @@ if (!firebase.apps.length) {
 
 <style>
 .chat{
-    background: #f7f7f7;
-    height: 100%;
+  background: #f7f7f7;
+  height: 100%;
 }
 .bottom_input{
-    position: fixed;
-    bottom: 50px;
-    left: 0px;
-    right: 0px;
-    height: 50px;
-    border: none;
-    outline: none;
-    padding-left: 55px;
-    padding-right: 55px;
-    font-weight: 400;
-    background: #C6c6c6;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding-left: 55px;
+  padding-right: 55px;
+  font-weight: 400;
+  background: #C6c6c6;
 }
 .user{
   display:inline-block;
@@ -111,6 +124,7 @@ if (!firebase.apps.length) {
 	border-radius: 15px;
 	line-height: 1.4;
 }
+
 .user + .user{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -124,6 +138,34 @@ if (!firebase.apps.length) {
   border-top-right-radius: 5px;
 }
 .user_message{
+    
+}
+.client{
+  display:inline-block;
+  clear: both;
+  display: block;
+  background-color: #ffffff;
+	margin-bottom: 2px;
+	float: left;
+	padding: 7px 13px;
+	font-size: 12px;
+	border-radius: 15px;
+	line-height: 1.4;
+}
+
+.client + .client{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.client:first-of-type {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 5px;
+}
+.client:last-of-type {
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 5px;
+}
+.client_message{
     
 }
 </style>
