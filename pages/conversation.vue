@@ -48,7 +48,7 @@
   }
   export default {
     firebase: {
-        chats: firebase.database().ref('user-chats/').child(store.state.user.key)
+        chats: firebase.database().ref('conversations/')
     }
   }
 </script>

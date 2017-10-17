@@ -42,6 +42,7 @@ export default new Vuex.Store({
           .then((user)=>{
               alert('signed out')
             })
+          // have to somehow figure out reset state state.user = null
       }
     },
     actions: {

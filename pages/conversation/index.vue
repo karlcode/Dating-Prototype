@@ -77,8 +77,7 @@
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         // list all chatroomIds that a userId is part of
-        firebase.database().ref('user-chats/').child(myUser).child(roomName).update({sender: myUser, last: time, name: user.displayName})
-        firebase.database().ref('user-chats/').child(otherUser).child(roomName).update({sender: myUser, last: time})
+        firebase.database().ref('conversations/').child(roomName).update({sender: myUser, last: time /*name: user.displayName*/})
       }
     },
     firebase: {
